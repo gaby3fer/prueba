@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Lirio Nocturno | Lo que la luna sabe 🌙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0f2a 0%, #0f1735 40%, #1a1f3a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .estrella {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            animation: parpadear 2s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes parpadear {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .luna {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #fffde7, #fff176);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 241, 118, 0.5);
+            z-index: 1;
+            animation: brilloLuna 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes brilloLuna {
+            0% { box-shadow: 0 0 20px rgba(255, 241, 118, 0.3); transform: scale(1); }
+            100% { box-shadow: 0 0 45px rgba(255, 241, 118, 0.7); transform: scale(1.02); }
+        }
+
+        .lago {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20%;
+            background: linear-gradient(180deg, rgba(25, 35, 70, 0.7), rgba(10, 15, 45, 0.95));
+            border-top: 2px solid rgba(255, 215, 0, 0.2);
+            z-index: 0;
+        }
+
+        .flor-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            z-index: 10;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .tarjeta {
+            background: rgba(15, 25, 55, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 24px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 350px;
+            text-align: center;
+            animation: flotar 3s ease-in-out infinite alternate;
+            z-index: 10;
+            position: relative;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-5px); }
+        }
+
+        .boton {
+            background: linear-gradient(135deg, #ff9800, #e65100);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            color: white;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px auto;
+            z-index: 10;
+            position: relative;
+        }
+
+        .boton:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .boton:active {
+            transform: scale(0.98);
+        }
+
+        .mensaje {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 18px;
+            max-width: 350px;
+            margin: 0 auto;
+            text-align: center;
+            transition: all 0.4s ease;
+            z-index: 10;
+            position: relative;
+        }
+
+        .texto-mensaje {
+            color: #fff9c4;
+            font-family: 'Georgia', serif;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .centro-flor {
+            animation: latido 1.8s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes aparecerPet {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .petalo {
+            animation: aparecerPet 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .petalo-1 { animation-delay: 0s; }
+        .petalo-2 { animation-delay: 0.05s; }
+        .petalo-3 { animation-delay: 0.1s; }
+        .petalo-4 { animation-delay: 0.15s; }
+        .petalo-5 { animation-delay: 0.2s; }
+        .petalo-6 { animation-delay: 0.25s; }
+        .petalo-int-1 { animation-delay: 0.3s; }
+        .petalo-int-2 { animation-delay: 0.35s; }
+        .petalo-int-3 { animation-delay: 0.4s; }
+        .petalo-int-4 { animation-delay: 0.45s; }
+        .petalo-int-5 { animation-delay: 0.5s; }
+        .petalo-int-6 { animation-delay: 0.55s; }
+
+        @keyframes crecerTallo {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+
+        .tallo-svg {
+            animation: crecerTallo 0.8s ease-out forwards;
+            transform-origin: top;
+        }
+
+        @keyframes crecerHoja {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .hoja-svg {
+            animation: crecerHoja 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        .hoja1 { animation-delay: 0.4s; }
+        .hoja2 { animation-delay: 0.5s; }
+        .hoja3 { animation-delay: 0.6s; }
+        .hoja4 { animation-delay: 0.7s; }
+    </style>
+</head>
+<body>
+
+    <div id="estrellas"></div>
+    <div class="luna"></div>
+    <div class="lago"></div>
+
+    <div class="flor-container">
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+            <rect class="tallo-svg" x="194" y="220" width="12" height="260" rx="6" fill="url(#talloGrad)"/>
+            
+            <g class="hoja-svg hoja1">
+                <path d="M190 420 Q140 400 120 370 Q145 380 190 395 Z" fill="url(#hojaGrad)" stroke="#1b5e20" stroke-width="0.5"/>
+                <line x1="185" y1="405" x2="140" y2="380" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+                <line x1="175" y1="405" x2="150" y2="390" stroke="#1b5e20" stroke-width="0.5" opacity="0.3"/>
+            </g>
+            
+            <g class="hoja-svg hoja2">
+                <path d="M210 400 Q260 380 280 350 Q255 365 210 380 Z" fill="url(#hojaGrad)" stroke="#1b5e20" stroke-width="0.5"/>
+                <line x1="215" y1="385" x2="260" y2="360" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+                <line x1="225" y1="385" x2="250" y2="370" stroke="#1b5e20" stroke-width="0.5" opacity="0.3"/>
+            </g>
+            
+            <g class="hoja-svg hoja3">
+                <path d="M195 340 Q145 320 130 285 Q155 305 195 320 Z" fill="url(#hojaGrad)" stroke="#1b5e20" stroke-width="0.5"/>
+                <line x1="190" y1="325" x2="160" y2="305" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+            </g>
+            
+            <g class="hoja-svg hoja4">
+                <path d="M205 330 Q255 310 270 275 Q245 295 205 310 Z" fill="url(#hojaGrad)" stroke="#1b5e20" stroke-width="0.5"/>
+                <line x1="210" y1="315" x2="240" y2="295" stroke="#1b5e20" stroke-width="1" opacity="0.5"/>
+            </g>
+            
+            <g class="petalo petalo-1">
+                <ellipse cx="200" cy="145" rx="45" ry="55" fill="url(#petaloExt)" stroke="#ce93d8" stroke-width="1.5" transform="rotate(0, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-2">
+                <ellipse cx="200" cy="145" rx="45" ry="55" fill="url(#petaloExt)" stroke="#ce93d8" stroke-width="1.5" transform="rotate(60, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-3">
+                <ellipse cx="200" cy="145" rx="45" ry="55" fill="url(#petaloExt)" stroke="#ce93d8" stroke-width="1.5" transform="rotate(120, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-4">
+                <ellipse cx="200" cy="145" rx="45" ry="55" fill="url(#petaloExt)" stroke="#ce93d8" stroke-width="1.5" transform="rotate(180, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-5">
+                <ellipse cx="200" cy="145" rx="45" ry="55" fill="url(#petaloExt)" stroke="#ce93d8" stroke-width="1.5" transform="rotate(240, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-6">
+                <ellipse cx="200" cy="145" rx="45" ry="55" fill="url(#petaloExt)" stroke="#ce93d8" stroke-width="1.5" transform="rotate(300, 200, 200)"/>
+            </g>
+            
+            <g class="petalo petalo-int-1">
+                <ellipse cx="200" cy="162" rx="35" ry="42" fill="url(#petaloInt)" stroke="#ba68c8" stroke-width="1" transform="rotate(30, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-int-2">
+                <ellipse cx="200" cy="162" rx="35" ry="42" fill="url(#petaloInt)" stroke="#ba68c8" stroke-width="1" transform="rotate(90, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-int-3">
+                <ellipse cx="200" cy="162" rx="35" ry="42" fill="url(#petaloInt)" stroke="#ba68c8" stroke-width="1" transform="rotate(150, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-int-4">
+                <ellipse cx="200" cy="162" rx="35" ry="42" fill="url(#petaloInt)" stroke="#ba68c8" stroke-width="1" transform="rotate(210, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-int-5">
+                <ellipse cx="200" cy="162" rx="35" ry="42" fill="url(#petaloInt)" stroke="#ba68c8" stroke-width="1" transform="rotate(270, 200, 200)"/>
+            </g>
+            <g class="petalo petalo-int-6">
+                <ellipse cx="200" cy="162" rx="35" ry="42" fill="url(#petaloInt)" stroke="#ba68c8" stroke-width="1" transform="rotate(330, 200, 200)"/>
+            </g>
+            
+            <circle class="centro-flor" cx="200" cy="200" r="28" fill="url(#centroGrad)" stroke="#f57f17" stroke-width="2"/>
+            <circle cx="200" cy="200" r="12" fill="url(#nucleoGrad)"/>
+            
+            <line x1="200" y1="175" x2="200" y2="145" stroke="#ff9800" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="200" cy="143" r="4" fill="#ffcc00"/>
+            <line x1="200" y1="175" x2="185" y2="150" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="184" cy="148" r="3.5" fill="#ffcc00"/>
+            <line x1="200" y1="175" x2="215" y2="150" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="216" cy="148" r="3.5" fill="#ffcc00"/>
+            <line x1="200" y1="175" x2="174" y2="158" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="173" cy="156" r="3.5" fill="#ffcc00"/>
+            <line x1="200" y1="175" x2="226" y2="158" stroke="#ff9800" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="227" cy="156" r="3.5" fill="#ffcc00"/>
+            
+            <defs>
+                <linearGradient id="talloGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#1b5e20"/>
+                    <stop offset="50%" stop-color="#4caf50"/>
+                    <stop offset="100%" stop-color="#1b5e20"/>
+                </linearGradient>
+                <linearGradient id="hojaGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#43a047"/>
+                    <stop offset="100%" stop-color="#1b5e20"/>
+                </linearGradient>
+                <radialGradient id="petaloExt" cx="50%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#f8e8fa"/>
+                    <stop offset="50%" stop-color="#e1bee7"/>
+                    <stop offset="100%" stop-color="#ce93d8"/>
+                </radialGradient>
+                <radialGradient id="petaloInt" cx="50%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#f3e5f5"/>
+                    <stop offset="50%" stop-color="#e1bee7"/>
+                    <stop offset="100%" stop-color="#d4a5e0"/>
+                </radialGradient>
+                <radialGradient id="centroGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#fff9c4"/>
+                    <stop offset="60%" stop-color="#ffd600"/>
+                    <stop offset="100%" stop-color="#fbc02d"/>
+                </radialGradient>
+                <radialGradient id="nucleoGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffcc00"/>
+                    <stop offset="100%" stop-color="#ef6c00"/>
+                </radialGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- POEMA ESPECIAL: cuando aún no son nada, pero la luna sabe lo que sientes -->
+    <div class="tarjeta">
+        <i class="fas fa-quote-left" style="color: #ffd600; opacity: 0.7;"></i>
+        <h2 style="color: #ffd600; font-family: Georgia; margin: 8px 0;">🌙 Lo que la luna sabe 🌙</h2>
+        <p style="color: #fff9c4; font-family: Georgia; font-size: 0.85rem; line-height: 1.6; font-style: italic;">
+            No sé si esta noche la luna nos mire,<br>
+            ni si mis palabras encuentran tu piel.<br>
+            Solo sé que en silencio te escribo,<br>
+            que me gustas más de lo que puedo ocultar.<br><br>
+            
+            Aún no somos nada, lo sé bien,<br>
+            pero cada estrella me habla de ti.<br>
+            Y este lirio que florece en la noche,<br>
+            es mi forma callada de decir...<br><br>
+            
+            <span style="color: #ffd600;">"Ojalá algún día la luna nos junte,<br>
+            ojalá este susurro llegue a tu voz.<br>
+            Por mientras, te sueño, te guardo, te cuido,<br>
+            y me encantas, aunque no sea los dos."</span><br><br>
+            
+            💫 Por si acaso la vida nos cruza,<br>
+            quiero que sepas: hoy, me gustas tú.
+        </p>
+        <i class="fas fa-quote-right" style="color: #ffd600; opacity: 0.7;"></i>
+    </div>
+
+    <button class="boton" id="btnMensaje">
+        <i class="fas fa-star"></i>
+        <span>🌙 Un susurro para ti</span>
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="mensaje" id="mensajeCard">
+        <div class="texto-mensaje" id="mensajeTexto">
+            🌙 La luna guarda el secreto de lo que siento por ti...
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        // Estrellas
+        const estrellasDiv = document.getElementById('estrellas');
+        for (let i = 0; i < 120; i++) {
+            const estrella = document.createElement('div');
+            estrella.className = 'estrella';
+            const size = Math.random() * 3 + 1;
+            estrella.style.width = size + 'px';
+            estrella.style.height = size + 'px';
+            estrella.style.left = Math.random() * 100 + '%';
+            estrella.style.top = Math.random() * 70 + '%';
+            estrella.style.animationDelay = Math.random() * 3 + 's';
+            estrella.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            estrellasDiv.appendChild(estrella);
+        }
+
+        // Frases con ese sentimiento: me gustas mucho, pero aún no somos nada
+        const frases = [
+            "🌙 No sé si la luna nos mira, pero yo solo puedo mirarte a ti. Me gustas, y es bonito aunque aún no sea nuestro.",
+            "💫 Aún no somos nada, pero cada vez que te veo, siento que podría serlo todo. Ojalá algún día.",
+            "✨ Me gustas tanto que hasta las estrellas se han dado cuenta. Solo falta que lo sepas tú.",
+            "🌙 Este lirio nocturno es como lo que siento: florece en silencio, con la esperanza de que algún día lo veas.",
+            "💖 No sé si esto llegará a algo, pero hoy, en este momento, solo quiero que sepas que me encantas.",
+            "🌟 Todavía no somos un nosotros, pero cada latido mío tiene tu nombre en espera.",
+            "🌙 La luna sabe lo que no me atrevo a decirte: que me gustas más de lo que puedo ocultar.",
+            "💫 Ojalá el destino nos mire un día. Mientras tanto, me quedo con la ilusión de verte.",
+            "✨ No pido nada más que una oportunidad. Una sonrisa tuya y ya tengo un mundo por descubrir.",
+            "🌙 Sé que aún no es momento, que aún no somos nada. Pero por si acaso: me gustas. Mucho.",
+            "💖 Hay personas que llegan sin avisar y de repente todo tiene sentido. Tú eres esa persona para mí.",
+            "🌟 No sé si algún día me darás una oportunidad, pero quiero que sepas que hoy, por ti, vale la pena esperar.",
+            "🌙 Me gusta cómo me haces sentir sin siquiera intentarlo. Y aunque no pase nada, ya valió la pena conocerte.",
+            "💫 El amor no siempre es correspondido de inmediato. Pero el mío, aunque callado, es sincero.",
+            "✨ Quisiera que la luna me prestara su luz para escribirte lo mucho que me importas. Pero me faltarían estrellas.",
+            "🌙 No sé qué será de esto, pero lo que siento por ti es real. Y eso, aunque no seamos nada, ya es hermoso.",
+            "💖 Si el destino nos permite encontrarnos de nuevo, prometo decirte todo lo que hoy guardo en silencio.",
+            "🌟 Aún no somos un cuento de amor, pero ojalá algún día lo seamos. Mientras, cuido esta ilusión como un tesoro.",
+            "🌙 Me gustas de una manera que no sé explicar. Solo sé que cuando apareces, la noche se vuelve más clara.",
+            "💫 No exijo nada, no pido promesas. Solo que sepas que, sin ser nada tuyo, ya te llevo en mi corazón."
+        ];
+
+        const btn = document.getElementById('btnMensaje');
+        const mensajeTexto = document.getElementById('mensajeTexto');
+        let animando = false;
+
+        function cambiarMensaje(nuevoTexto) {
+            if (animando) return;
+            animando = true;
+            
+            mensajeTexto.style.opacity = '0';
+            mensajeTexto.style.transform = 'translateY(8px)';
+            
+            setTimeout(() => {
+                mensajeTexto.textContent = nuevoTexto;
+                mensajeTexto.style.transition = 'all 0.35s ease';
+                mensajeTexto.style.opacity = '1';
+                mensajeTexto.style.transform = 'translateY(0)';
+                animando = false;
+            }, 200);
+        }
+
+        function fraseAleatoria() {
+            return frases[Math.floor(Math.random() * frases.length)];
+        }
+
+        btn.addEventListener('click', () => {
+            cambiarMensaje(fraseAleatoria());
+            
+            const icono = btn.querySelector('.fa-star');
+            if (icono) {
+                icono.style.transform = 'rotate(20deg) scale(1.2)';
+                setTimeout(() => { icono.style.transform = ''; }, 300);
+            }
+            
+            const centro = document.querySelector('.centro-flor');
+            if (centro) {
+                centro.style.transform = 'scale(1.15)';
+                setTimeout(() => { centro.style.transform = ''; }, 200);
+            }
+        });
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                mensajeTexto.textContent = "🌙 La luna sabe lo que siento... y tú, ¿te imaginas?";
+            }, 500);
+        });
+    </script>
+</body>
+</html>
