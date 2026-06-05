@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0f2a 0%, #0f1735 40%, #1a1f3a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Estrellas */
+.estrella {
+    position: fixed;
+    background: white;
+    border-radius: 50%;
+    animation: parpadear 2s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes parpadear {
+    0% { opacity: 0.2; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Luna */
+.luna {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, #fffde7, #fff176);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 241, 118, 0.5);
+    z-index: 1;
+    animation: brilloLuna 3s ease-in-out infinite alternate;
+}
+
+@keyframes brilloLuna {
+    0% { box-shadow: 0 0 20px rgba(255, 241, 118, 0.3); transform: scale(1); }
+    100% { box-shadow: 0 0 45px rgba(255, 241, 118, 0.7); transform: scale(1.02); }
+}
+
+/* Lago */
+.lago {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20%;
+    background: linear-gradient(180deg, rgba(25, 35, 70, 0.7), rgba(10, 15, 45, 0.95));
+    border-top: 2px solid rgba(255, 215, 0, 0.2);
+    z-index: 0;
+}
+
+/* Contenedor de la flor SVG */
+.flor-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    z-index: 10;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+}
+
+svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Animaciones de la flor */
+@keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.centro-flor {
+    animation: latido 1.8s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes aparecerPet {
+    0% { opacity: 0; transform: scale(0); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.petalo {
+    animation: aparecerPet 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.petalo-1 { animation-delay: 0s; }
+.petalo-2 { animation-delay: 0.05s; }
+.petalo-3 { animation-delay: 0.1s; }
+.petalo-4 { animation-delay: 0.15s; }
+.petalo-5 { animation-delay: 0.2s; }
+.petalo-6 { animation-delay: 0.25s; }
+.petalo-int-1 { animation-delay: 0.3s; }
+.petalo-int-2 { animation-delay: 0.35s; }
+.petalo-int-3 { animation-delay: 0.4s; }
+.petalo-int-4 { animation-delay: 0.45s; }
+.petalo-int-5 { animation-delay: 0.5s; }
+.petalo-int-6 { animation-delay: 0.55s; }
+
+@keyframes crecerTallo {
+    0% { transform: scaleY(0); }
+    100% { transform: scaleY(1); }
+}
+
+.tallo-svg {
+    animation: crecerTallo 0.8s ease-out forwards;
+    transform-origin: top;
+}
+
+@keyframes crecerHoja {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.hoja-svg {
+    animation: crecerHoja 0.5s ease-out forwards;
+    opacity: 0;
+}
+.hoja1 { animation-delay: 0.4s; }
+.hoja2 { animation-delay: 0.5s; }
+.hoja3 { animation-delay: 0.6s; }
+.hoja4 { animation-delay: 0.7s; }
+
+/* Tarjeta */
+.tarjeta {
+    background: rgba(15, 25, 55, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 24px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 350px;
+    text-align: center;
+    animation: flotar 3s ease-in-out infinite alternate;
+    z-index: 10;
+    position: relative;
+}
+
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-5px); }
+}
+
+/* Botón */
+.boton {
+    background: linear-gradient(135deg, #ff9800, #e65100);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 40px;
+    color: white;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
+    z-index: 10;
+    position: relative;
+}
+
+.boton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.boton:active {
+    transform: scale(0.98);
+}
+
+/* Mensaje */
+.mensaje {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 18px;
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+    transition: all 0.4s ease;
+    z-index: 10;
+    position: relative;
+}
+
+.texto-mensaje {
+    color: #fff9c4;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive para móviles */
+@media (max-width: 500px) {
+    .flor-container {
+        max-width: 320px;
+    }
+    .tarjeta, .mensaje {
+        max-width: 300px;
+    }
+    .tarjeta p {
+        font-size: 0.75rem;
+    }
+    .boton {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+    .luna {
+        width: 50px;
+        height: 50px;
+        top: 10px;
+        right: 10px;
+    }
+}
